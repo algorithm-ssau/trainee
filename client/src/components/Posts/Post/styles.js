@@ -43,6 +43,8 @@ export default makeStyles({
   },
   title: {
     padding: '0 16px',
+     fontFamily: 'Montserrat Alternates',
+    color: '#6667AB'
   },
   cardActions: {
     padding: '0 16px 8px 16px',
