@@ -5,20 +5,20 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 from platform import python_version
-
+from conf import Conf
 
 def mail_send(to, text, theme):
     server = 'smtp.mail.ru'
-    user = 'allen.night@mail.ru'
-    password = 'MpWEjJNwVssafaZrxeGp'
+    user = Conf.email_login
+    password = Conf.email_password
 
-    recipients = ['someuser1@mail.ru']
-    sender = 'info@test.org'
-    subject = 'Тема сообщения'
-    text = 'Здравствуйте, спасибо, что пользуетесь нашим сервисом'
+    recipients = [to]
+    sender = 'trainne@info.org'
+    subject = 'Новое обновление!'
+    text = 'Здравствуйте, спасибо, что пользуетесь нашим сервисом. Вышло новое обновление, у нас появилась отдельная страничка для каждого поста! Заходите на trainee.ru'
     html = '<html><head></head><body><p>' + text + '</p></body></html>'
 
-    filepath = "fish.png"
+    filepath = "stage.png"
     basename = os.path.basename(filepath)
     filesize = os.path.getsize(filepath)
 
