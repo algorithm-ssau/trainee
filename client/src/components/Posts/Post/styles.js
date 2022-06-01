@@ -20,18 +20,19 @@ export default makeStyles({
     borderRadius: '15px',
     height: '100%',
     position: 'relative',
+    backgroundColor:"whitesmoke",
   },
   overlay: {
     position: 'absolute',
     top: '20px',
     left: '20px',
-    color: 'white',
+    color: 'whitesmoke',
   },
   overlay2: {
     position: 'absolute',
     top: '20px',
     right: '20px',
-    color: 'white',
+    color: 'whitesmoke',
   },
   grid: {
     display: 'flex',
@@ -43,12 +44,14 @@ export default makeStyles({
   },
   title: {
     padding: '0 16px',
-     fontFamily: 'Montserrat Alternates',
-    color: '#6667AB'
   },
   cardActions: {
     padding: '0 16px 8px 16px',
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
   },
 });
