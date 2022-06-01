@@ -1,52 +1,39 @@
 import smtplib
-import os
+import pymongo
+import pandas as pd
+from email.message import EmailMessage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
-from platform import python_version
-from conf import Conf
 
-def mail_send(to, text, theme):
-    server = 'smtp.mail.ru'
-    user = Conf.email_login
-    password = Conf.email_password
+URL = 'mongodb+srv://admin:admin@cluster0.d4p8x.mongodb.net/?retryWrites=true&w=majority'
+client = pymongo.MongoClient(URL)
 
-    recipients = [to]
-    sender = 'trainne@info.org'
-    subject = 'Новое обновление!'
-    text = 'Здравствуйте, спасибо, что пользуетесь нашим сервисом. Вышло новое обновление, у нас появилась отдельная страничка для каждого поста! Заходите на trainee.ru'
-    html = '<html><head></head><body><p>' + text + '</p></body></html>'
+dbname = 'myFirstDatabase'
+db = client[dbname]
 
-    filepath = "stage.png"
-    basename = os.path.basename(filepath)
-    filesize = os.path.getsize(filepath)
+mycollection = db['users']
+records = mycollection.find()
+list_cursor = list(records)
 
-    msg = MIMEMultipart('alternative')
-    msg['Subject'] = subject
-    msg['From'] = 'Python script <' + sender + '>'
-    msg['To'] = ', '.join(recipients)
-    msg['Reply-To'] = sender
-    msg['Return-Path'] = sender
-    msg['X-Mailer'] = 'Python/' + (python_version())
+df = pd.DataFrame(list_cursor)
+emails = df['email']
 
-    part_text = MIMEText(text, 'plain')
-    part_html = MIMEText(html, 'html')
-    part_file = MIMEBase('application', 'octet-stream; name="{}"'.format(basename))
-    part_file.set_payload(open(filepath, "rb").read())
-    part_file.add_header('Content-Description', basename)
-    part_file.add_header('Content-Disposition', 'attachment; filename="{}"; size={}'.format(basename, filesize))
-    encoders.encode_base64(part_file)
+msg = MIMEMultipart()
+ 
 
-    msg = MIMEMultipart('alternative')
-    msg['Subject'] = subject
-    msg['From'] = 'Python script <' + sender + '>'
-    msg['To'] = ', '.join(recipients)
-    msg['Reply-To'] = sender
-    msg['Return-Path'] = sender
-    msg['X-Mailer'] = 'Python/' + (python_version())
+password = "ihfzcshpwuitojnt"
+msg['From'] = "f2323sdafsdf@gmail.com"
+msg['Subject'] = "Зайдите на https://trainee-application.netlify.app/ для того, чтобы посмотреть на нововедения!"
+server = smtplib.SMTP('smtp.gmail.com: 587')
 
-    mail = smtplib.SMTP_SSL(server)
-    mail.login(user, password)
-    mail.sendmail(sender, recipients, msg.as_string())
-    mail.quit()
+server.starttls()
+
+server.login(msg['From'], password)
+
+for email in emails:
+    msg["To"] = email
+    server.sendmail(msg['From'], msg['To'], msg.as_string())
+
+server.quit()
+
+print( "Успешно отправлено письмо на адресс %s:" % (msg['To']))
