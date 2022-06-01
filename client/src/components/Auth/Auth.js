@@ -52,7 +52,7 @@ const SignUp = () => {
     }
   };
 
-  const googleError = () => console.log('Неудалось зайти чере Google. Попробуйте еще!');
+  const googleError = () => console.log('Не удалось зайти чере Google. Попробуйте еще раз!');
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
