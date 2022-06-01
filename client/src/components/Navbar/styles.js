@@ -10,6 +10,7 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '10px 50px',
+    backgroundColor:"whitesmoke",
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
@@ -21,7 +22,7 @@ export default makeStyles((theme) => ({
     fontWeight: 300,
   },
   image: {
-    marginLeft: '10px',
+    marginLeft: '25px',
     marginTop: '5px',
   },
   toolbar: {
@@ -43,8 +44,12 @@ export default makeStyles((theme) => ({
       justifyContent: 'center',
     },
   },
+  signin: {
+    backgroundColor:"#2288b4",
+  },
   logout: {
     marginLeft: '20px',
+    backgroundColor:"#2288b4",
   },
   userName: {
     display: 'flex',
@@ -56,7 +61,6 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
   },
   purple: {
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
+    backgroundColor: "#2288b4",
   },
 }));

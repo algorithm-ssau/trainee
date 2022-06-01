@@ -39,8 +39,8 @@ const Navbar = () => {
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <Link to="/" className={classes.brandContainer}>
-        <img component={Link} to="/" src={memoriesText} alt="icon" height="45px" />
-        <img className={classes.image} src={memoriesLogo} alt="icon" height="40px" />
+        <img component={Link} to="/" src={memoriesText} alt="icon" height="55px" />
+        <img className={classes.image} src={memoriesLogo} alt="icon" height="55px" />
       </Link>
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
@@ -50,7 +50,7 @@ const Navbar = () => {
             <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
           </div>
         ) : (
-          <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+          <Button component={Link} to="/auth" variant="contained" className={classes.signin} color="primary">Sign In</Button>
         )}
       </Toolbar>
     </AppBar>
